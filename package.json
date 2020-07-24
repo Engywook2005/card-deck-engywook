@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/Engywook2005/card-deck-engywook/issues"
   },
-  "homepage": "https://github.com/Engywook2005/card-deck-engywook#readme"
+  "homepage": "https://github.com/Engywook2005/card-deck-engywook#readme",
+  "devDependencies": {
+    "eslint": "^7.3.1"
+  }
 }
