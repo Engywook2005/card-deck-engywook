@@ -1,6 +1,7 @@
 /* global module */
 /* global require */
 
+const Card = require('../card/Card');
 const Constants = require('../utils/constants');
 const document = require('html-element').document;
 
@@ -38,9 +39,14 @@ class DeckMaker {
     const cards = [];
 
     for(let i = this.range.min; i <= this.range.max; i++) {
+      const fillNumCardFunc = this[`${this.faceType}FillNum`];
+      const cardFace = fillNumCardFunc(this.suit, numberedCardTemplates[i]);
+      const card = new Card(cardFace, i, this.suit);
 
+      cards.push(card);
     }
 
+    return cards;
   }
 
   /* Face card fillers */
@@ -52,8 +58,13 @@ class DeckMaker {
    * @param {Object} template
    * @returns {HTMLDivElement}
    */
-  fillNumHTML(suit, template) {
+  htmlFillNum(suit, template) {
     const cardFace = document.createElement('div');
+    cardFace.style = {
+      color: suit.color
+    }
+
+
 
     return cardFace;
   }
@@ -65,7 +76,7 @@ class DeckMaker {
    * @param {Object} template
    * @returns {String}
    */
-  fillNumASCII(suit, template) {
+  asciiFillNum(suit, template) {
     const cardFace = '';
 
     return cardFace;
@@ -78,8 +89,10 @@ class DeckMaker {
    * @param {Object} template
    * @returns {Object}
    */
-  fillNumJSON(suit, template) {
+  jsonFillNum(suit, template) {
+    const cardFace = {};
 
+    return cardFace;
   }
 }
 
