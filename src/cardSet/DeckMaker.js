@@ -60,11 +60,32 @@ class DeckMaker {
    */
   htmlFillNum(suit, template) {
     const cardFace = document.createElement('div');
-    cardFace.style = {
-      color: suit.color
-    }
+    cardFace.setAttribute(
+      'style',
+      {
+        color: suit.color
+      })
+    ;
 
+    template.forEach((row) => {
+      const cardRow = document.createElement('div');
 
+      row.forEach((symbolHolder) => {
+        const suitSymbol = document.createElement('div');
+        suitSymbol.innerText = symbolHolder ? suit.symbol : '';
+
+        suitSymbol.setAttribute('style',
+          {
+            'float': 'left',
+            'minWidth': '1rem',
+            'marginLeft': '1rem',
+            'marginRight': '1rem'
+          });
+        cardRow.addChild(suitSymbol);
+      })
+
+      cardFace.addChild(cardRow);
+    });
 
     return cardFace;
   }
@@ -77,7 +98,29 @@ class DeckMaker {
    * @returns {String}
    */
   asciiFillNum(suit, template) {
-    const cardFace = '';
+    const emptyRow =  '|                  |\n';
+    let cardFace =    '/------------------\\\n';
+
+    cardFace = `${cardFace}${emptyRow}`;
+
+    template.forEach((row) => {
+        cardFace = `${cardFace}|`;
+
+        row.forEach((suitHolder) => {
+          const threeSpace = '   ';
+          const symbolSpace = ` ${suit.symbol} `;
+          const nextSymbol = suitHolder ? symbolSpace: threeSpace;
+
+          cardFace = `${cardFace}${threeSpace}`;
+          cardFace = `${cardFace}${nextSymbol}`;
+          cardFace = `${cardFace}${threeSpace}`;
+        });
+
+        cardFace = `${cardFace}|\n`;
+        cardFace = `${cardFace}${emptyRow}`;
+    });
+
+    cardFace = `${cardFace}\\------------------/`;
 
     return cardFace;
   }
