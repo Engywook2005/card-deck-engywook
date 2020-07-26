@@ -7,22 +7,24 @@ class Card {
 
   /**
    *
-   * @param {*} face          Image to show on face of card
-   * @param {String} value    2 - 10, Ace, Jack, Queen, King
-   * @param {String} suit     e.g. ♣, ♠, ♦, ♥
+   * @param {*}         face            Image to show on face of card
+   * @param {String}    value           2 - 10, Ace, Jack, Queen, King
+   * @param {String}    suit            e.g. ♣, ♠, ♦, ♥
+   * @param {Function}  renderFunction  Called when card is rendered.
    */
-  constructor(face, value, suit) {
+  constructor(face, value, suit, renderFunction) {
     this.face = face;
     this.value = value;
     this.suit = suit;
+    this.renderFunction = renderFunction;
   }
 
   /**
    * Display card face.
    * @param {HTMLElement} parentElement   When using an html card face.
    */
-  render(parentElement = null) {
-
+  render() {
+    this.renderFunction(this.face);
   }
 
   /**
@@ -40,4 +42,4 @@ class Card {
   }
 }
 
-module.export = Card;
+module.exports = Card;

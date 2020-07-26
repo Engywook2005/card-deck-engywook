@@ -6,15 +6,16 @@ const Constants = require('../utils/constants');
 
 class DeckMaker {
 
-  // @TODO setting for how to return cards - default html5? Or should html5/json/etc be handled at a higher level?
   /**
    * @param {Object} suit         Will eventually support images. For now limited to ascii symbol and color
+   * @param {Function} renderFunc Called when card is rendered
    * @param {Object} range        Default is lower limit 2, upper limit 10. No provision currently for numbers above 10
-   *                              (would need to supply own card design?
+   *                              (would need to supply own template)
    * @param {Array} faceCards     Jacks, Queens, what have you
    * @param {Number} jokers       Number of jokers to include
    */
   constructor(suit,
+              renderFunc,
               range = {
                 min: 2,
                 max: 10
@@ -22,6 +23,7 @@ class DeckMaker {
               faceCards = ['J','Q','K','A'],
               jokers = 0) {
     this.suit = suit;
+    this.renderFunc = renderFunc;
     this.range = range;
     this.faceCards = faceCards;
     this.jokers = jokers;
@@ -36,7 +38,7 @@ class DeckMaker {
 
     for(let i = this.range.min; i <= this.range.max; i++) {
       const cardFace = this.fillNumberedCard(this.suit, numberedCardTemplates[i]);
-      const card = new Card(cardFace, i, this.suit);
+      const card = new Card(cardFace, i, this.suit, this.renderFunc);
 
       cards.push(card);
     }
