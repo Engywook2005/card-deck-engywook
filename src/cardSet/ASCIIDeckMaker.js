@@ -9,11 +9,16 @@ class ASCIIDeckMaker extends DeckMaker {
    * Numbered card face as ASCII for stdout.
    *
    * @param {Object} suit
+   * @param {Number} num
    * @param {Object} template
    * @returns {String}
    */
-  fillNumberedCard(suit, template) {
-    let cardFace =    '/---------\\\n';
+  fillNumberedCard(suit, num, template) {
+    const corner = num < 10
+      ? `-`
+      : ``;
+
+    let cardFace =    `${num}--------${corner}${suit.symbol}\n`;
 
     //cardFace = `${cardFace}${emptyRow}`;
 
@@ -31,10 +36,9 @@ class ASCIIDeckMaker extends DeckMaker {
       });
 
       cardFace = `${cardFace}|\n`;
-      //cardFace = `${cardFace}${emptyRow}`;
     });
 
-    cardFace = `${cardFace}\\---------/`;
+    cardFace = `${cardFace}${suit.symbol}--------${corner}${num}`;
 
     return cardFace;
   }

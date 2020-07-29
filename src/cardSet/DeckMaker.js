@@ -15,7 +15,6 @@ class DeckMaker {
    * @param {Number} jokers       Number of jokers to include
    */
   constructor(suit,
-              renderFunc,
               range = {
                 min: 2,
                 max: 10
@@ -23,7 +22,6 @@ class DeckMaker {
               faceCards = ['J','Q','K','A'],
               jokers = 0) {
     this.suit = suit;
-    this.renderFunc = renderFunc;
     this.range = range;
     this.faceCards = faceCards;
     this.jokers = jokers;
@@ -37,8 +35,8 @@ class DeckMaker {
     const cards = [];
 
     for(let i = this.range.min; i <= this.range.max; i++) {
-      const cardFace = this.fillNumberedCard(this.suit, numberedCardTemplates[i]);
-      const card = new Card(cardFace, i, this.suit, this.renderFunc);
+      const cardFace = this.fillNumberedCard(this.suit, i, numberedCardTemplates[i]);
+      const card = new Card(cardFace, i, this.suit);
 
       cards.push(card);
     }

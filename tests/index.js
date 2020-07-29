@@ -8,18 +8,15 @@ const suit = {
         color: '#ff0000'
       };
 
-const dm = new DeckMaker(suit, () => {});
+const dm = new DeckMaker(suit);
 
-const cardFace = dm.fillNumberedCard(suit, numCards[10]);
+const cardFace = dm.fillNumberedCard(suit, 10, numCards[10]);
 console.log(cardFace);
 
-const dm2 = new DeckMaker(suit,
-  (face) => {
-    console.log(face);
-  });
+const dm2 = new DeckMaker(suit);
 const deck = dm2.fillSuit();
 
 deck.forEach((card) => {
-  card.render();
+  console.log(card.getFace());
 });
 
