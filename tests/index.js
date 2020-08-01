@@ -1,6 +1,6 @@
 /* global require */
 
-const DeckMaker = require('../src/cardSet/ASCIIDeckMaker');
+const DeckMaker = require('../src/deck/DeckMakers/ASCIIDeckMaker');
 const numCards = require('../src/utils/constants').numCards;
 
 const suit = {
