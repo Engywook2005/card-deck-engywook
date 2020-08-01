@@ -25,8 +25,11 @@ dSuit.forEach((card) => {
 */
 
 const asciiDeck = new ASCIIDeck();
-const deck = asciiDeck.getDeck();
 
-deck.forEach((card) => {
+asciiDeck.shuffle();
+
+console.log(asciiDeck.getDeck().length);
+
+asciiDeck.getDeck().forEach((card) => {
   console.log(card.getFace());
 });

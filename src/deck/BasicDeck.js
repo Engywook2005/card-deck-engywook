@@ -28,7 +28,16 @@ class BasicDeck {
   shuffle() {
     this.updateHistory();
 
-    // @TODO actual shuffling.
+    const shuffled = [];
+
+    while(this.deck.length > 0) {
+      const nextPos = Math.floor(Math.random() * this.deck.length);
+
+      shuffled.push(this.deck.splice(nextPos, 1)[0]);
+    }
+
+    this.deck = shuffled;
+
     return this.deck;
   }
 
