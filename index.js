@@ -3,9 +3,12 @@
 
 const CardDecks = require('./src');
 
-// Only use the deckmaker when populating a dynamic deck. For a regular according-to-hoyle deck just use ASCIIDeck or
-// HTMLDeck
+// Only use the deckmaker when populating a dynamic deck. Would need to use BasicDeck as well to set up own DeckMaker
+// behavior.
+//
+// For a regular according-to-hoyle deck just use ASCIIDeck or HTMLDeck
 module.exports.ASCIIDeckMaker = CardDecks.ASCIIDeckMaker;
 module.exports.HTMLDeckMaker = CardDecks.HTMLDeckMaker;
 
-// When just using a regular deck.
+module.exports.BasicDeck = CardDecks.BasicDeck;
+module.exports.HTMLDeck = CardDecks.HTMLDeck;

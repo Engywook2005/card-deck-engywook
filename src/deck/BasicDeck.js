@@ -1,41 +1,19 @@
 /* global module */
-/* global require */
 
-const DeckMaker = require('./DeckMakers/DeckMaker');
-
-class Deck {
-
-  /**
-   * Builds standard 52-card deck, with or without jokers.
-   *
-   * @param {DeckMaker}   deckMaker   Type of DeckMaker to use. Supports ASCIIDeckMaker or HTMLDeckMaker currently.
-   * @param {Number}      numDecks    Number of decks to use.
-   * @param {Number}      numJokers   Number of jokers to include. Note default is 0, not 2.
-   */
-  constructor(deckMaker, numDecks = 1, numJokers = 0) {
-
+/**
+ * If using a different card deck e.g. Tarot start here.
+ */
+class BasicDeck {
+  constructor() {
     // Current deck.
     this.deck = [];
 
     // Previous decks, allowing for undo.
     this.deckHistory = [];
-
-    const suits = ['♣', '♠', '♦', '♥'];
-
-    for(let i = 0; i < numDecks; i++) {
-      suits.forEach((suit) => {
-        const dm = new deckMaker(suit);
-
-        const cards = dm.fillSuit();
-
-        this.deck = this.deck.concat(deck, cards);
-        this.deckHistory.push(this.deck);
-      });
-    }
   }
 
   /**
-   * Returns deck. Should really only need to be called once per instantiation of Deck class or its subclasses.
+   * Returns deck. Should really only need to be called once per instantiation of HoyleDeck class or its subclasses.
    * Other returns of this.deck are to allow method chaining.
    *
    * @returns {[]|*[]}
@@ -61,6 +39,7 @@ class Deck {
    */
   draw(numCards = 1) {
     const drawnCards = [];
+
     this.updateHistory();
 
     while(numCards > 0 && this.deck.length > 0) {
@@ -91,6 +70,8 @@ class Deck {
    * @param {Array}   cards
    */
   burn(cards) {
+    this.updateHistory();
+
     // @TODO
 
     return this.deck();
@@ -110,4 +91,4 @@ class Deck {
   }
 }
 
-module.exports = Deck;
+module.exports = BasicDeck;
