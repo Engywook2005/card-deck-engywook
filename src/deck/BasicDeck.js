@@ -6,7 +6,7 @@
 class BasicDeck {
   constructor() {
     // Current deck.
-    this.deck = [];
+    this.cards = [];
 
     // Previous decks, allowing for undo.
     this.deckHistory = [];
@@ -18,41 +18,45 @@ class BasicDeck {
    *
    * @returns {[]|*[]}
    */
-  getDeck() {
-    return this.deck;
+  getCards() {
+    return this.cards;
   }
 
   /**
-   * Shuffles and returns deck
+   * Shuffles and returns deck.
+   *
+   * @returns {[]}
    */
   shuffle() {
     this.updateHistory();
 
     const shuffled = [];
 
-    while(this.deck.length > 0) {
-      const nextPos = Math.floor(Math.random() * this.deck.length);
+    while(this.cards.length > 0) {
+      const nextPos = Math.floor(Math.random() * this.cards.length);
 
-      shuffled.push(this.deck.splice(nextPos, 1)[0]);
+      shuffled.push(this.cards.splice(nextPos, 1)[0]);
     }
 
-    this.deck = shuffled;
+    this.cards = shuffled;
 
-    return this.deck;
+    return this.cards;
   }
 
   /**
    * Draw one or more cards.
    *
    * @param {number}  numCards  Number of cards to draw. Default is 1.
+   * @returns [Card]
    */
   draw(numCards = 1) {
     const drawnCards = [];
 
     this.updateHistory();
 
-    while(numCards > 0 && this.deck.length > 0) {
-      drawnCards.push(this.deck.shift());
+    while(numCards > 0 && this.cards.length > 0) {
+      drawnCards.push(this.cards.shift());
+      numCards -= 1;
     }
 
     return drawnCards;
@@ -61,16 +65,16 @@ class BasicDeck {
   /**
    * Returns cards to deck.
    *
-   * @param {Array}   cards  Card to be sent back to deck.
+   * @param {[Card]}   returned  Cards to be sent back to deck.
    */
-  drop(cards) {
+  returnCards(returned) {
     this.updateHistory();
 
-    cards.forEach((card) => {
-      this.deck.push(card);
+    returned.forEach((card) => {
+      this.cards.push(card);
     });
 
-    return this.deck;
+    return this.cards;
   }
 
   /**
@@ -83,20 +87,20 @@ class BasicDeck {
 
     // @TODO
 
-    return this.deck();
+    return this.cards();
   }
 
   /**
    * Push existing deck into history.
    */
   updateHistory() {
-    this.deckHistory.push(this.deck.slice());
+    this.deckHistory.push(this.cards.slice());
   }
 
   undo() {
-    this.deck = this.deckHistory.pop();
+    this.cards = this.deckHistory.pop();
 
-    return this.deck;
+    return this.cards;
   }
 }
 

@@ -24,12 +24,14 @@ dSuit.forEach((card) => {
 });
 */
 
-const asciiDeck = new ASCIIDeck();
+const deck = new ASCIIDeck();
 
-asciiDeck.shuffle();
+deck.shuffle();
 
-console.log(asciiDeck.getDeck().length);
+const cards = deck.getCards();
 
-asciiDeck.getDeck().forEach((card) => {
+while(cards.length > 0) {
+  const card = deck.draw()[0];
+
   console.log(card.getFace());
-});
+}

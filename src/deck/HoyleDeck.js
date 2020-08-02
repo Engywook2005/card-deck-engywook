@@ -27,9 +27,9 @@ class HoyleDeck extends BasicDeck {
       suits.forEach((suit) => {
         const dm = new deckMaker(suit);
 
-        const cards = dm.fillSuit();
+        const newCards = dm.fillSuit();
 
-        this.deck = this.deck.concat(cards);
+        this.cards = this.cards.concat(newCards);
       });
     }
 
