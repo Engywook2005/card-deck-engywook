@@ -20,6 +20,15 @@ class HTMLDeckMaker extends DeckMaker {
 
     let cardFace = `<div style = "width: 7.5rem; height: 10.5rem; color: ${suit.color}; position: relative; border-color: #000099; border-width: 1px; border-style: solid; border-radius: 5px;">`
 
+    let cardCorners = '';
+
+    cardCorners = `${cardCorners}<div style="position:absolute; top: 0rem; left: 0rem;">${suit.symbol}</div>`;
+    cardCorners = `${cardCorners}<div style="position:absolute; top: 0rem; right: 0rem;"><strong>${num}</strong></div>`;
+    cardCorners = `${cardCorners}<div style="position:absolute; bottom: 0rem; left: 0rem;"><strong>${num}</strong></div>`;
+    cardCorners = `${cardCorners}<div style="position:absolute; bottom: 0rem; right: 0rem;">${suit.symbol}</div>`;
+
+    cardFace = `${cardFace}${cardCorners}`;
+
     let cardNumbers = `<div style = "position: absolute; top: 1rem; left: 1rem; padding-left: 0.5rem; clear: left; width: 4.5rem; border-color: ${suit.color} border-width: 1px; border-style: solid;">`
 
     template.forEach((row) => {
