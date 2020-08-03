@@ -31,6 +31,8 @@ class HoyleDeck extends BasicDeck {
 
         this.cards = this.cards.concat(newCards);
       });
+
+      // @TODO handle jokers.
     }
 
     this.updateHistory();

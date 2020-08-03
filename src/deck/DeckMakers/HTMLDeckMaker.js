@@ -2,7 +2,6 @@
 /* global require */
 
 const DeckMaker = require('./DeckMaker');
-const docu = require('html-element').document;
 
 /**
  * Creates HTML versions of card
@@ -13,38 +12,32 @@ class HTMLDeckMaker extends DeckMaker {
    * Numbered card face as HTML.
    *
    * @param {Object} suit
+   * @param {Number} num
    * @param {Object} template
-   * @returns {HTMLDivElement}
+   * @returns {String}
    */
-  fillNumberedCard(suit, template) {
-    const cardFace = docu.createElement('div');
-    cardFace.setAttribute(
-      'style',
-      {
-        color: suit.color
-      });
+  fillNumberedCard(suit, num, template) {
+
+    // @TODO perhaps should use HTMLReactParser here? This would presume though that the only use of this class would
+    // be in React.
+    let cardFace = `<div style = "color: ${suit.color}; clear: left;">`
 
     template.forEach((row) => {
-      const cardRow = docu.createElement('div');
+      let cardRow = '<div style="clear: left; height: 1rem; min-height: 1rem;">';
 
+      let symbolsOnRow = '';
       row.forEach((symbolHolder) => {
-        const suitSymbol = docu.createElement('div');
-        suitSymbol.innerText = symbolHolder ? suit.symbol : '';
+        const symbolText = symbolHolder ? suit.symbol : '&nbsp;';
+        const openDiv = '<div style="float: left; min-width: 1rem; width: 1rem; margin-left: 1rem; margin-right: 1rem">'
+        symbolsOnRow = `${symbolsOnRow}${openDiv}${symbolText}</div>`;
+      });
 
-        suitSymbol.setAttribute('style',
-          {
-            'float': 'left',
-            'minWidth': '1rem',
-            'marginLeft': '1rem',
-            'marginRight': '1rem'
-          });
-        cardRow.addChild(suitSymbol);
-      })
+      cardRow = `${cardRow}${symbolsOnRow}</div>`;
 
-      cardFace.addChild(cardRow);
+      cardFace = `${cardFace}${cardRow}`;
     });
 
-    return cardFace;
+    return `${cardFace}</div>`;
   }
 }
 
