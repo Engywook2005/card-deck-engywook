@@ -28,7 +28,7 @@ class HTMLDeckMaker extends DeckMaker {
       let symbolsOnRow = '';
       row.forEach((symbolHolder) => {
         const symbolText = symbolHolder ? suit.symbol : '&nbsp;';
-        const openDiv = '<div style="float: left; min-width: 1rem; width: 1rem; margin-left: 1rem; margin-right: 1rem">'
+        const openDiv = '<div style="float: left; min-width: 1rem; width: 1rem; margin-left: 0.25rem; margin-right: 0.25rem">'
         symbolsOnRow = `${symbolsOnRow}${openDiv}${symbolText}</div>`;
       });
 
