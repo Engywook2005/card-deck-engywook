@@ -18,9 +18,9 @@ class HTMLDeckMaker extends DeckMaker {
    */
   fillNumberedCard(suit, num, template) {
 
-    // @TODO perhaps should use HTMLReactParser here? This would presume though that the only use of this class would
-    // be in React.
-    let cardFace = `<div style = "color: ${suit.color}; clear: left;">`
+    let cardFace = `<div style = "width: 7.5rem; height: 10.5rem; color: ${suit.color}; position: relative; border-color: #000099; border-width: 1px; border-style: solid; border-radius: 5px;">`
+
+    let cardNumbers = `<div style = "position: absolute; top: 1rem; left: 1rem; padding-left: 0.5rem; clear: left; width: 4.5rem; border-color: ${suit.color} border-width: 1px; border-style: solid;">`
 
     template.forEach((row) => {
       let cardRow = '<div style="clear: left; height: 1rem; min-height: 1rem;">';
@@ -34,10 +34,10 @@ class HTMLDeckMaker extends DeckMaker {
 
       cardRow = `${cardRow}${symbolsOnRow}</div>`;
 
-      cardFace = `${cardFace}${cardRow}`;
+      cardNumbers = `${cardNumbers}${cardRow}`;
     });
 
-    return `${cardFace}</div>`;
+    return `${cardFace}${cardNumbers}</div></div>`;
   }
 }
 
